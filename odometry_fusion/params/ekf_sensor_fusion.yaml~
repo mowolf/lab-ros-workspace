@@ -1,0 +1,106 @@
+# For parameter descriptions, please refer to the template parameter files for each node.
+
+ekf_se_odom:
+  odom_frame: odom
+  base_link_frame: base_link
+  world_frame: odom
+
+  two_d_mode: true
+
+  frequency: 50
+
+  odom0: husky_velocity_controller/odom
+  odom0_config: [false, false, false,
+               false, false, false,
+               true, true, true,
+               false, false, true,
+               false, false, false]
+  odom0_differential: false
+  odom0_queue_size: 10
+  
+  odom1: mono_odometer/odometry
+  odom1_config: [false, false, false,
+               false, false, false,
+               true, true, true,
+               false, false, true,
+               false, false, false]
+  odom1_differential: false
+  odom1_queue_size: 10
+
+  imu0: imu/data
+  imu0_config: [false, false, false,
+               true, true, true,
+               false, false, false,
+               true, true, true,
+               false, false, false]
+  imu0_differential: true
+  imu0_queue_size: 10
+  imu0_remove_gravitational_acceleration: true
+
+ekf_se_map:
+  frequency: 50
+  sensor_timeout: 0.1
+  two_d_mode: false
+  transform_time_offset: 0.0
+  transform_timeout: 0.0
+  print_diagnostics: true
+  debug: false
+
+  map_frame: map
+  odom_frame: odom
+  base_link_frame: base_link
+  world_frame: map
+
+  odom0: husky_velocity_controller/odom
+  odom0_config: [false, false, false,
+                false, false, false,
+                true, true, true,
+                false, false, true,
+                false, false, false]
+  odom0_differential: false
+  odom0_queue_size: 10
+
+  odom1: odometry/gps
+  odom1_config: [true,  true,  false,
+                 false, false, false,
+                 false, false, false,
+                 false, false, false,
+                 false, false, false]
+  odom1_queue_size: 30
+  odom1_differential: false
+
+  odom1_nodelay: true
+  odom1_relative: false
+  
+  odom2: mono_odometer/odometry
+  odom2_config: [false, false, false,
+               false, false, false,
+               true, true, true,
+               false, false, true,
+               false, false, false]
+  odom2_differential: false
+  odom2_queue_size: 10
+
+  imu0: imu/data
+  imu0_config: [false, false, false,
+              true, true, true,
+              false, false, false,
+              true, true, true,
+              false, false, false]
+  imu0_differential: true
+  imu0_queue_size: 10
+  imu0_remove_gravitational_acceleration: true
+
+
+
+navsat_transform:
+  frequency: 50
+  delay: 3.0
+  magnetic_declination_radians: 0.053930674  # For Munich
+  yaw_offset: 1.570796327  # IMU reads 0 facing magnetic north, not east: 1.570796327 (= Pi/2)
+  zero_altitude: false
+  broadcast_utm_transform: true
+  publish_filtered_gps: true
+  use_odometry_yaw: false
+  wait_for_datum: false
+

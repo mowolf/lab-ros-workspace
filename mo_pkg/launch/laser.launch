@@ -1,0 +1,14 @@
+<launch>
+	
+	<node name="urg_node" pkg="urg_node" type="urg_node">
+		<param name="ip_address" value="192.168.0.10" type="string"/>
+		<param name="frame_id" value="base_laser_mount" type="string"/>
+	
+		
+		<remap from="most_intense" to="scan"/>
+		
+	</node>
+	
+
+	
+</launch>

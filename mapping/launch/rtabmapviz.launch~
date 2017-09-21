@@ -1,0 +1,24 @@
+<launch>
+  <!-- Visualisation (client side) -->
+  <group ns="rtabmap">
+    <node pkg="rtabmap_ros" type="rtabmapviz" name="rtabmapviz" args="-d $(find rtabmap_ros)/launch/config/rgbd_gui.ini" output="screen">
+      <param name="subscribe_depth" type="bool" value="true"/>
+      <param name="subscribe_scan" type="bool" value="true"/> <!-- if you have a laser -->
+      <param name="queue_size" type="int" value="50"/>
+      <param name="frame_id" type="string" value="base_link"/>
+
+
+          <remap from="husky_velocity_controller/odom" to="/base_controller/odom"/>
+          <remap from="scan" to="/base_scan"/>
+
+
+          <remap from="camera/rgb/image_rect_color" to="/camera/rgb/image_rect_color"/>
+          <remap from="camera/depth/image" to="/camera/depth_registered/image_raw"/>
+          <remap from="camera/rgb/camera_info" to="/camera/rgb/camera_info"/>
+
+
+      <param name="rgb/image_transport" type="string" value="compressed"/>
+      <param name="depth/image_transport" type="string" value="compressedDepth"/>
+    </node>
+  </group>
+</launch>
